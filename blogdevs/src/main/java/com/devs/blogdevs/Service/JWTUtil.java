@@ -39,7 +39,7 @@ public class JWTUtil {
 
     public String extractEmail(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(SECRET.getBytes())
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
@@ -49,7 +49,7 @@ public class JWTUtil {
     public boolean validateToken(String token, UserDetails userDetails) {
         try {
             Jwts.parser()
-                    .setSigningKey(SECRET.getBytes())
+                    .setSigningKey(getSigningKey())
                     .parseClaimsJws(token);
             return true;
         } catch (Exception e) {

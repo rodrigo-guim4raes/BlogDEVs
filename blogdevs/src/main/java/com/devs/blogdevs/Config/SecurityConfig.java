@@ -32,8 +32,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll() // login, registro, etc.
                         .requestMatchers("/auth/registrar").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/posts/**").permitAll() // qualquer um pode ver os posts
-                        .requestMatchers("/comentario/**").authenticated() // precisa estar logado para ver ou postar comentários
+                        .requestMatchers(HttpMethod.GET, "/post/**").permitAll() // qualquer um pode ver os posts
+                        .requestMatchers("/coment/**").authenticated() // precisa estar logado para ver ou postar comentários
                         .anyRequest().authenticated() // qualquer outra rota também exige autenticação
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

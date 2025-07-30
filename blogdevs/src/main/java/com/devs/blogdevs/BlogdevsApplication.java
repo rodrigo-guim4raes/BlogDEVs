@@ -1,5 +1,6 @@
 package com.devs.blogdevs;
 
+import com.devs.blogdevs.dto.CommentRequest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,5 +14,8 @@ public class BlogdevsApplication {
 		String encodedPassword = encoder.encode(rawPassword);
 		System.out.println("Senha original: " + rawPassword);
 		System.out.println("Senha hash (para o SQL): " + encodedPassword);
+		CommentRequest request = new CommentRequest();
+		System.out.println("Conteúdo recebido: " + request.getContent());
+
 	}
 }
