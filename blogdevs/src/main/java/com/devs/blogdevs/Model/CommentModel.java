@@ -23,6 +23,7 @@ public class CommentModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
+    @JsonBackReference
     private PostModel post;
 
     @Column(name = "conteudo", nullable = false, columnDefinition = "TEXT")

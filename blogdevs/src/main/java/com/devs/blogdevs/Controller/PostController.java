@@ -47,22 +47,22 @@ public class PostController { //RECEBE LÓGICA HTTP E DELEGA
             return ResponseEntity.status(HttpStatus.CREATED).body(new PostResponse(save));
     }
 
-    @GetMapping //listar novas postagens
+    @GetMapping("/menu") //listar novas postagens
     public ResponseEntity<List<PostModel>> listPost() {
         List<PostModel> post = service.listPost();
         return ResponseEntity.ok(post);
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/posts/delete/{id}")
     public ResponseEntity<Void>deletedPost(@PathVariable Long id){
         service.deletePost(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/posts/{id}")
-    public ResponseEntity<PostModel> editPost(@RequestBody PostModel post, @PathVariable Long id){
+    @PutMapping("/posts/edit/{id}")
+    public ResponseEntity<PostResponse> editPost(@RequestBody PostRequest post, @PathVariable Long id){
         PostModel newPost = service.editPost(post, id);
-        return ResponseEntity.ok(newPost);
+        return ResponseEntity.ok(new PostResponse(newPost));
     }
 
 }

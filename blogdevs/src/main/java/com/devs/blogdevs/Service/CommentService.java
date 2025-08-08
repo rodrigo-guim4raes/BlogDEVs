@@ -46,15 +46,17 @@ public class CommentService {
         commentRepository.deleteById(id);
     }
 
-    public List<CommentModel> listComment(){
-        return commentRepository.findAll();
+    public List<CommentModel> listComment(Long postId){
+        return commentRepository.findByPostId(postId);
     }
 
-    public CommentModel editComment(CommentModel edit, Long id){
+    public CommentModel editComment(CommentRequest commentRequest, Long id){
         CommentModel newComment = commentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Comentário não encontrada"));
 
-       newComment.setContent(edit.getContent());
+        if (commentRequest.getContent() != null){
+            newComment.setContent(commentRequest.getContent());
+        }
 
         return commentRepository.save(newComment);
     }

@@ -2,6 +2,7 @@ package com.devs.blogdevs.Service;
 
 import com.devs.blogdevs.Model.PostModel;
 import com.devs.blogdevs.Repository.PostRepository;
+import com.devs.blogdevs.dto.PostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,6 +21,9 @@ public class PostService {
     }
 
     public void deletePost(Long id){
+        PostModel post = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post não encontrado"));
+
         repository.deleteById(id);
     }
 
@@ -27,12 +31,16 @@ public class PostService {
         return repository.findAll();
     }
 
-    public PostModel editPost(PostModel edit, Long id){
+    public PostModel editPost(PostRequest postRequest, Long id){
         PostModel newPost = repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Postagem não encontrada"));
 
-        newPost.setTitle(edit.getTitle());
-        newPost.setContent(edit.getContent());
+        if (postRequest.getTitle() != null) {
+            newPost.setTitle(postRequest.getTitle());
+        }
+        if (postRequest.getContent() != null){
+            newPost.setContent(postRequest.getContent());
+        }
 
         return repository.save(newPost);
     }

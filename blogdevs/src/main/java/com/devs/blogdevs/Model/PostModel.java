@@ -1,6 +1,7 @@
 package com.devs.blogdevs.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class PostModel {
 
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<CommentModel> comment = new ArrayList<>();
 
     public PostModel() {
